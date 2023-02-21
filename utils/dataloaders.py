@@ -339,6 +339,31 @@ class LoadStreams:
             gstreamer_str = (f'udpsrc port={PORT_RX} auto-multicast=0 ! application/x-rtp, media=video, encoding-name=H264 ! rtpjitterbuffer latency=0 ! rtph264depay ! decodebin ! videoconvert ! video/x-raw,format=BGR ! appsink drop=1')
             cap = cv2.VideoCapture(gstreamer_str, cv2.CAP_GSTREAMER)
 
+            #no sirve
+            # gstreamer_str = (f'udpsrc port=8554 ! application/x-rtp, media=video, encoding-name=H264 ! rtpjitterbuffer ! payload=96 rtph264depay ! decodebin ! videoconvert ! appsink')
+            # cap = cv2.VideoCapture(gstreamer_str, cv2.CAP_GSTREAMER)
+
+        #-----------------------------------------------#we put the server as default--------------------------------------------------------------------
+        #     gstreamer_str='udpsrc port=8554 caps = "application/x-rtp, media=(string)video, clock-rate=(int)90000, \
+        #  encoding-name=(string)H264,\
+        #  payload=(int)96" ! rtph264depay ! decodebin ! videoconvert ! appsink'
+        #     cap = cv2.VideoCapture(gstreamer_str, cv2.CAP_GSTREAMER)
+
+            # cap = cv2.VideoCapture(
+            #     'udpsrc port=8554 caps = "application/x-rtp, media=(string)video, clock-rate=(int)90000, encoding-name=(string)H264"'
+            #     ' ! rtph264depay'
+            #     ' ! avdec_h264'
+            #     ' ! videoconvert'
+            #     ' ! appsink', cv2.CAP_GSTREAMER)
+
+        #----------------------------------------------------------
+            # gstreamer_str = (f'udpsrc port={port_rx} auto-multicast=0 ! application/x-rtp, media=video, encoding-name=H264 ! rtpjitterbuffer latency=300 ! rtph264depay ! decodebin ! videoconvert ! video/x-raw,format=BGR ! appsink drop=1')
+            # cap = cv2.VideoCapture(gstreamer_str, cv2.CAP_GSTREAMER)
+        #----------------------------------------------------------
+            # rec_gstr = (f'udpsrc port={PORT_RX} caps = "application/x-rtp, media=(string)video, clock-rate=(int)90000, encoding-name=(string)H264" ! rtph264depay ! avdec_h264 ! videoconvert ! appsink')
+            # cap = cv2.VideoCapture(rec_gstr, cv2.CAP_GSTREAMER)
+        #------------------------------------------------------------------------------------------------------------------------------------------------
+    
 
             assert cap.isOpened(), f'{st}Failed to open {s}'
             w = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))

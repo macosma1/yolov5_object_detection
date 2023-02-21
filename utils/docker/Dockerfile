@@ -104,7 +104,6 @@ WORKDIR /usr/src/yolov5
 
 # Copy contents
 #COPY . /usr/src/yolov5
-#RUN git clone https://github.com/macosma1/yolov5.git /usr/src/yolov5/project
 RUN git clone https://github.com/macosma1/yolov5_object_detection /usr/src/yolov5
 
 # Set environment variables
